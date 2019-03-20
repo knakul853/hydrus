@@ -1,4 +1,4 @@
-"""Test for checking if the response format is proper. Run test_crud before running this."""
+"""Test for checking CLI"""
 import unittest
 import random
 import string
@@ -31,8 +31,8 @@ def gen_dummy_object(class_, doc):
         return object_
 
 
-class ViewsTestCase(unittest.TestCase):
-    """Test Class for the app."""
+class ViewsCliTest(unittest.TestCase):
+    """Test Class for the CLI."""
 
     @classmethod
     def setUpClass(self):
@@ -472,6 +472,6 @@ class ViewsTestCase(unittest.TestCase):
 
 if __name__ == '__main__':
     message = """
-    Running tests for the app. Checking if all responses are in proper order.
+    Running tests for the CLI.
     """
     unittest.main()
