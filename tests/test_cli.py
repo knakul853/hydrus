@@ -13,6 +13,30 @@ from hydrus.samples import doc_writer_sample
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, scoped_session
 from hydrus.data.db_models import Base
+import click
+from click.testing import CliRunner
+from cli import startserver
+
+def test_startserver():
+    runner = CliRunner()
+
+    #starting server with invalid params
+
+    result = runner.invoke(startserver,
+    ["--adduser","sqlite://not-valid","http://localhost",
+    "--port","serve"])
+
+    assert result.exit_code == 2
+
+
+     #starting ther server
+
+    result = runner.invoke(startserver,
+    ["--adduser","--api","--no-auth","sqlite:///:memory:",
+    "--hydradoc","--port","--no-token","http://localhost",
+    "serve"])  
+    assert result.exit_code == 0
+
 
 
 def gen_dummy_object(class_, doc):
@@ -93,6 +117,11 @@ class CliTests(unittest.TestCase):
                         uuid.uuid4()),
                     session=self.session)
 
+    
+
 
 if __name__ == '__main__':
+    message = """
+    Running tests for the cli
+    """
     unittest.main()
